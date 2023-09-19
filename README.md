@@ -9,7 +9,7 @@ No requirements.
 Basic usage of this module is as follows:
 ```hcl
 module "vault_config" {
-  source = "git@github.com:AwesomeCICD/ceratf-module-vault-config"
+	source  = "git@github.com:AwesomeCICD/ceratf-module-vault-config"
 }
 ```
 ## Resources
@@ -37,3 +37,8 @@ No inputs.
 |------|-------------|
 | <a name="output_vault_mount_path"></a> [vault\_mount\_path](#output\_vault\_mount\_path) | n/a |
 <!-- END_AUTOMATED_TF_DOCS_BLOCK -->
+
+
+# Writing Docs
+
+`terraform-docs -c .circleci/.terraform-docs.yml .` 
