@@ -73,7 +73,7 @@ EOF
 
 
 resource "vault_policy" "fieldguide_prod" {
-  name = "ieldguide-prod-deploy"
+  name = "fieldguide-prod-deploy"
 
   policy = <<EOF
 path "secret/*" {
@@ -89,7 +89,7 @@ EOF
 }
 
 resource "vault_policy" "fieldguide_dev" {
-  name = "ieldguide-dev-deploy"
+  name = "fieldguide-dev-deploy"
 
   policy = <<EOF
 path "secret/*" {
