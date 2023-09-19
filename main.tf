@@ -139,7 +139,7 @@ resource "vault_jwt_auth_backend_role" "fieldguide_prod" {
   token_policies = ["nexus-deploy-access", "fieldguide-prod-deploy"]
 
   bound_claims = {
-    "oidc.circleci.com/context-ids" = "[\"7cf67bf2-cf99-4cc7-8ae5-a0daf86ae02b\"]"
+    "oidc.circleci.com/context-ids" = "[\"87c698a8-77fd-4ec0-935a-51ee55904aae\"]"
     "oidc.circleci.com/project-id"  = "fd5dc210-23ad-42e5-b01e-417320fc3945"
   }
   user_claim              = "sub"
@@ -153,7 +153,7 @@ resource "vault_jwt_auth_backend_role" "fieldguide_dev" {
   token_policies = ["nexus-deploy-access", "fieldguide-dev-deploy"]
 
   bound_claims = {
-    "oidc.circleci.com/context-ids" = "[\"093549cb-82d4-48af-bd80-6c45ef7bbf07\"]"
+    "oidc.circleci.com/context-ids" = "[\"7cf67bf2-cf99-4cc7-8ae5-a0daf86ae02b\"]"
     "oidc.circleci.com/project-id"  = "fd5dc210-23ad-42e5-b01e-417320fc3945"
   }
   user_claim              = "sub"
