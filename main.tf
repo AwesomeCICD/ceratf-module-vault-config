@@ -157,3 +157,21 @@ resource "vault_jwt_auth_backend_role" "fieldguide_dev" {
   role_type               = "jwt"
   user_claim_json_pointer = true
 }
+
+resource "vault_jwt_auth_backend_role" "rollouts_demo" {
+  backend        = vault_jwt_auth_backend.awesomeci_oidc.path
+  role_name      = "rollouts-deploy"
+  token_policies = ["nexus-deploy-access"]
+
+  bound_claims = {
+    "oidc.circleci.com/context-ids" = "7cf67bf2-cf99-4cc7-8ae5-a0daf86ae02b"
+    "oidc.circleci.com/project-id"  = "1acd25fb-b342-4aa9-b8e3-a572bfecbf31"
+  }
+  user_claim              = "sub"
+  role_type               = "jwt"
+  user_claim_json_pointer = true
+}
+
+
+
+
