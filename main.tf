@@ -122,7 +122,7 @@ resource "vault_jwt_auth_backend_role" "boa_prod" {
   token_policies = ["nexus-deploy-access", "boa-prod-deploy"]
 
   bound_claims = {
-    "oidc.circleci.com/context-ids" = "7cf67bf2-cf99-4cc7-8ae5-a0daf86ae02b"
+    "oidc.circleci.com/context-ids" = "87c698a8-77fd-4ec0-935a-51ee55904aae"
     "oidc.circleci.com/project-id"  = "788dd296-2fca-4718-82f8-07db1637a58e"
   }
   user_claim              = "sub"
