@@ -59,10 +59,10 @@ resource "vault_policy" "boa_prod" {
 path "secret/*" {
   capabilities = ["list"]
 }
-path "secret/data/cluster/boa-prod" {
+path "secret/data/cluster/boa" {
   capabilities = ["list","read"]
 }
-path "secret/metadata/cluster/boa-prod" {
+path "secret/metadata/cluster/boa" {
   capabilities = ["list","read"]
 }
 EOF
