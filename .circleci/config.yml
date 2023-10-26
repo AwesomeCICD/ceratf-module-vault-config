@@ -9,11 +9,48 @@ jobs:
     steps:
       - terraform/fmt
       - terraform/validate
+  tag-it:
+    executor: terraform/default
+    steps:
+      - run:
+          name: confirm semver
+          command: |
+            version=$(git tag -i | tail -1)
+            SEMVER_INCREMENT=`git log -1 --pretty=%B | sed -En 's/.*\[semver: ?(major|minor|patch|skip)\].*/\1/pi' | tr '[:upper:]' '[:lower:]'`
+            if [ -z ${SEMVER_INCREMENT} ];then
+              echo "Merge commit did not indicate which SemVer increment to make. Please ammend commit with [semver:FOO] where FOO is major, minor, or patch"
+              exit 1
+            elif [ "$SEMVER_INCREMENT" == "skip" ];then
+              echo "SEMVER in commit indicated to skip tag"
+              exit 0
+            else:
+              MAJOR=`awk -F. '{ print $1 }' <<< $version`
+              MINOR=`awk -F. '{ print $2 }' <<< $version`
+              PATCH=`awk -F. '{ print $3 }' <<< $version`
+              case $SEMVER_INCREMENT:
+                major)
+                  MAJOR=$(( MAJOR + 1 ))
+                  ;;
+                minor)
+                  MINOR=$(( MINOR + 1 ))
+                  ;;
+                patch)
+                  PATCH=$(( PATCH + 1 ))
+                  ;;
+                echo "New Version: ${MAJOR}.${MINOR}.${PATCH}"        
+              esac
+            fi
+
 
 workflows:
   main:
     jobs:
       - tf-validate:
           name: Validate Terraform Plan
+      - tag-it:
+          requires: [tf-validate]
+          # filters:
+          #   branches:
+          #     only: [main]
 
 # VS Code Extension Version: 1.4.0
