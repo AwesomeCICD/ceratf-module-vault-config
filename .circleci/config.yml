@@ -54,9 +54,9 @@ workflows:
       - tf-validate:
           name: Validate Terraform Plan
       - tag-it
-          #requires: [Validate Terraform Plan]
-          # filters:
-          #   branches:
-          #     only: [main]
+          requires: [Validate Terraform Plan]
+          filters:
+            branches:
+              only: [main]
 
 # VS Code Extension Version: 1.4.0
