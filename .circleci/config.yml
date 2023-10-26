@@ -24,9 +24,9 @@ jobs:
               echo "SEMVER in commit indicated to skip tag"
               exit 0
             else:
-              MAJOR=`awk -F. '{ print $1 }' <<< $version`
-              MINOR=`awk -F. '{ print $2 }' <<< $version`
-              PATCH=`awk -F. '{ print $3 }' <<< $version`
+              MAJOR=`awk -F. '{ print $1 }' <\<\< $version`
+              MINOR=`awk -F. '{ print $2 }' <\<\< $version`
+              PATCH=`awk -F. '{ print $3 }' <\<\< $version`
               case $SEMVER_INCREMENT:
                 major)
                   MAJOR=$(( MAJOR + 1 ))
@@ -48,7 +48,7 @@ workflows:
       - tf-validate:
           name: Validate Terraform Plan
       - tag-it:
-          requires: [tf-validate]
+          requires: [Validate Terraform Plan]
           # filters:
           #   branches:
           #     only: [main]
