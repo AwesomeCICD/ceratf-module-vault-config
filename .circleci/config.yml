@@ -24,13 +24,13 @@ jobs:
             elif [ "$SEMVER_INCREMENT" == "skip" ];then
               echo "SEMVER in commit indicated to skip tag"
               exit 0
-            else:
+            else
               echo "Semver: $version"
               MAJOR=`echo $version |awk -F. '{ print $1 }'`
               MINOR=`echo $version |awk -F. '{ print $2 }'`
               PATCH=`echo $version |awk -F. '{ print $3 }'`
               case $SEMVER_INCREMENT in
-                "major")
+                major)
                   MAJOR=$(( MAJOR + 1 ))
                   ;;
                 minor)
