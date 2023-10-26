@@ -25,7 +25,7 @@ jobs:
               echo "SEMVER in commit indicated to skip tag"
               exit 0
             else
-              echo "Semver: $version"
+              echo "Semver: $version will be bumped as $SEMVER_INCREMENT"
               MAJOR=`echo $version |awk -F. '{ print $1 }'`
               MINOR=`echo $version |awk -F. '{ print $2 }'`
               PATCH=`echo $version |awk -F. '{ print $3 }'`
