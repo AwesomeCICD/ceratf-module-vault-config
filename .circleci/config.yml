@@ -12,6 +12,7 @@ jobs:
   tag-it:
     executor: terraform/default
     steps:
+      - checkout
       - run:
           name: confirm semver
           command: |
@@ -47,8 +48,8 @@ workflows:
     jobs:
       - tf-validate:
           name: Validate Terraform Plan
-      - tag-it:
-          requires: [Validate Terraform Plan]
+      - tag-it
+          #requires: [Validate Terraform Plan]
           # filters:
           #   branches:
           #     only: [main]
