@@ -41,6 +41,8 @@ jobs:
                   ;;   
               esac
               echo "New Version: ${MAJOR}.${MINOR}.${PATCH}"     
+              git tag ${MAJOR}.${MINOR}.${PATCH}
+              git push --tags
             fi
 
 
