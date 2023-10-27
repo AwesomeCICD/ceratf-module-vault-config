@@ -1,3 +1,8 @@
+---
+name: Team PR Template for Updating Policy
+title: Policy for namespace FOO [semver:minor]
+
+---
 ## Add Namespace: <NEW_NS>
 
 #### Project
