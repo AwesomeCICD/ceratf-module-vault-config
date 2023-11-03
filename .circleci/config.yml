@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   terraform: circleci/terraform@3.2.1
-  semver: cci-labs/semver@dev:6
+  semver: cci-labs/semver@dev:alpine
 
 jobs:
   tf-validate:
