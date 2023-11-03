@@ -24,7 +24,7 @@ workflows:
                   # grab latest tag from git as current
                   echo "export CURRENT_VERSION=$(git tag -i | tail -1)" >> $BASH_ENV
                   # parse for bump level in commit message
-                  echo "export SEMVER_INCREMENT=`git log -1 --pretty=%B | sed -En 's/.*\[semver: ?(major|minor|patch|skip)\].*/\1/pi' | tr '[:upper:]' '[:lower:]'` >> $BASH_ENV
+                  echo "export SEMVER_INCREMENT=`git log -1 --pretty=%B | sed -En 's/.*\[semver: ?(major|minor|patch|skip)\].*/\1/pi' | tr '[:upper:]' '[:lower:]'`" >> $BASH_ENV
           post-steps: 
             - run: 
                 name: Use new version values
