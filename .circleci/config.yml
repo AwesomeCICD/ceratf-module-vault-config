@@ -22,6 +22,7 @@ workflows:
             - run: 
                 name: Use new version values
                 command: |
+                  echo "Tagging as: ${MAJOR}.${MINOR}.${PATCH}"
                   git tag ${MAJOR}.${MINOR}.${PATCH}
                   #git push --tags
           requires: [Validate Terraform Plan]
