@@ -17,6 +17,7 @@ workflows:
           name: Validate Terraform Plan
       - semver/bump:
           pre-steps: 
+            - checkout
             - run:
                 name: Set current and bump level
                 command: |
