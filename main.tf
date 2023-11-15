@@ -238,3 +238,36 @@ resource "vault_jwt_auth_backend_role" "dr-demo" {
   role_type               = "jwt"
   user_claim_json_pointer = true
 }
+
+#
+# DC-DB-Demo-App Namespace Access
+#
+
+resource "vault_policy" "dc-db-demo-app" {
+  name = "dc-db-demo-app-deploy"
+
+  policy = <<EOF
+path "secret/*" {
+  capabilities = ["list"]
+}
+path "secret/data/cluster/dc-db-demo-app" {
+  capabilities = ["list","read"]
+}
+path "secret/metadata/cluster/dc-db-demo-app" {
+  capabilities = ["list","read"]
+}
+EOF
+}
+
+resource "vault_jwt_auth_backend_role" "scara" {
+  backend        = vault_jwt_auth_backend.awesomeci_oidc.path
+  role_name      = "dc-db-demo-app-deploy"
+  token_policies = ["nexus-deploy-access", "dc-db-demo-app-deploy"]
+
+  bound_claims = {
+    "oidc.circleci.com/project-id" = ""
+  }
+  user_claim              = "sub"
+  role_type               = "jwt"
+  user_claim_json_pointer = true
+}
