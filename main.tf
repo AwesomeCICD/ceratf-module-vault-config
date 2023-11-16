@@ -265,7 +265,7 @@ resource "vault_jwt_auth_backend_role" "scara" {
   token_policies = ["nexus-deploy-access", "dc-db-demo-app-deploy"]
 
   bound_claims = {
-    "oidc.circleci.com/project-id" = ""
+    "oidc.circleci.com/project-id" = "70862590-d318-41ed-b64a-15162a6bb77a"
   }
   user_claim              = "sub"
   role_type               = "jwt"
