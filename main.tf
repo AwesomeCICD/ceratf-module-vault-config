@@ -259,7 +259,7 @@ path "secret/metadata/cluster/dc-db-demo-app" {
 EOF
 }
 
-resource "vault_jwt_auth_backend_role" "scara" {
+resource "vault_jwt_auth_backend_role" "dc-db-demo-app" {
   backend        = vault_jwt_auth_backend.awesomeci_oidc.path
   role_name      = "dc-db-demo-app-deploy"
   token_policies = ["nexus-deploy-access", "dc-db-demo-app-deploy"]
