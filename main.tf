@@ -5,6 +5,13 @@ resource "vault_jwt_auth_backend" "awesomeci_oidc" {
   bound_issuer       = "https://oidc.circleci.com/org/efc130dc-284f-4533-964e-844f5c173860"
 }
 
+resource "vault_jwt_auth_backend" "gha_oidc" {
+  description        = "GitHub Actions OIDC Integration"
+  path               = "jwt"
+  oidc_discovery_url = "https://token.actions.githubusercontent.com"
+  bound_issuer       = "https://token.actions.githubusercontent.com"
+}
+
 resource "vault_mount" "kvv2" {
   path = "secret"
   type = "kv"
@@ -126,6 +133,60 @@ resource "vault_jwt_auth_backend_role" "boa_prod" {
     "oidc.circleci.com/project-id"  = "788dd296-2fca-4718-82f8-07db1637a58e"
   }
   user_claim              = "sub"
+  role_type               = "jwt"
+  user_claim_json_pointer = true
+}
+
+resource "vault_jwt_auth_backend_role" "boa_dev_fork" {
+  backend        = vault_jwt_auth_backend.awesomeci_oidc.path
+  role_name      = "boa-dev-fork-deploy"
+  token_policies = ["nexus-deploy-access", "boa-dev-deploy"]
+
+  bound_claims = {
+    "oidc.circleci.com/context-ids" = "7cf67bf2-cf99-4cc7-8ae5-a0daf86ae02b"
+    "oidc.circleci.com/project-id"  = "7fe5f8d4-8930-4874-a8ce-71f233d16fe8"
+  }
+  user_claim              = "sub"
+  role_type               = "jwt"
+  user_claim_json_pointer = true
+}
+
+resource "vault_jwt_auth_backend_role" "boa_prod_fork" {
+  backend        = vault_jwt_auth_backend.awesomeci_oidc.path
+  role_name      = "boa-prod-fork-deploy"
+  token_policies = ["nexus-deploy-access", "boa-prod-deploy"]
+
+  bound_claims = {
+    "oidc.circleci.com/context-ids" = "87c698a8-77fd-4ec0-935a-51ee55904aae"
+    "oidc.circleci.com/project-id"  = "7fe5f8d4-8930-4874-a8ce-71f233d16fe8"
+  }
+  user_claim              = "sub"
+  role_type               = "jwt"
+  user_claim_json_pointer = true
+}
+
+resource "vault_jwt_auth_backend_role" "boa_dev_gha_fork" {
+  backend        = vault_jwt_auth_backend.gha_oidc.path
+  role_name      = "boa-dev-gha-fork-deploy"
+  token_policies = ["nexus-deploy-access", "boa-dev-deploy"]
+
+  bound_claims = {
+    "repository": "AwesomeCICD/github-actions-bank-of-aion"
+  }
+  user_claim              = "actor"
+  role_type               = "jwt"
+  user_claim_json_pointer = true
+}
+
+resource "vault_jwt_auth_backend_role" "boa_prod_gha_fork" {
+  backend        = vault_jwt_auth_backend.gha_oidc.path
+  role_name      = "boa-prod-gha-fork-deploy"
+  token_policies = ["nexus-deploy-access", "boa-prod-deploy"]
+
+  bound_claims = {
+    "repository": "AwesomeCICD/github-actions-bank-of-aion"
+  }
+  user_claim              = "actor"
   role_type               = "jwt"
   user_claim_json_pointer = true
 }
