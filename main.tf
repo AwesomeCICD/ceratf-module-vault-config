@@ -171,7 +171,7 @@ resource "vault_jwt_auth_backend_role" "boa_dev_gha_fork" {
   token_policies = ["nexus-deploy-access", "boa-dev-deploy"]
 
   bound_claims = {
-    "repository": "AwesomeCICD/github-actions-bank-of-aion"
+    "repository" : "AwesomeCICD/github-actions-bank-of-aion"
   }
   user_claim              = "actor"
   role_type               = "jwt"
@@ -184,7 +184,7 @@ resource "vault_jwt_auth_backend_role" "boa_prod_gha_fork" {
   token_policies = ["nexus-deploy-access", "boa-prod-deploy"]
 
   bound_claims = {
-    "repository": "AwesomeCICD/github-actions-bank-of-aion"
+    "repository" : "AwesomeCICD/github-actions-bank-of-aion"
   }
   user_claim              = "actor"
   role_type               = "jwt"
