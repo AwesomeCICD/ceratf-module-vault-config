@@ -271,20 +271,3 @@ resource "vault_jwt_auth_backend_role" "dc-db-demo-app" {
   role_type               = "jwt"
   user_claim_json_pointer = true
 }
-
-#
-# Working Title (Server Test Hack App)
-#
-
-resource "vault_jwt_auth_backend_role" "working-title" {
-  backend        = vault_jwt_auth_backend.awesomeci_oidc.path
-  role_name      = "working-title-deploy"
-  token_policies = ["nexus-deploy-access"]
-
-  bound_claims = {
-    "oidc.circleci.com/project-id" = "cb279ff5-ab6b-4c53-9728-ac63c8173bfb"
-  }
-  user_claim              = "sub"
-  role_type               = "jwt"
-  user_claim_json_pointer = true
-}
