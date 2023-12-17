@@ -1,6 +1,6 @@
 resource "vault_jwt_auth_backend" "circlecilabs_oidc" {
   description        = "CircleCI-Labs OIDC Integration"
-  path               = "jwt"
+  path               = "labs_jwt"
   oidc_discovery_url = "https://oidc.circleci.com/org/4ada2c32-f0c2-4b60-a6b8-af674858fd51"
   bound_issuer       = "https://oidc.circleci.com/org/4ada2c32-f0c2-4b60-a6b8-af674858fd51"
 }
