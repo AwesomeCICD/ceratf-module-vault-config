@@ -7,7 +7,7 @@ resource "vault_jwt_auth_backend" "awesomeci_oidc" {
 
 resource "vault_jwt_auth_backend" "gha_oidc" {
   description        = "GitHub Actions OIDC Integration"
-  path               = "jwt"
+  path               = "jwt-gha"
   oidc_discovery_url = "https://token.actions.githubusercontent.com"
   bound_issuer       = "https://token.actions.githubusercontent.com"
 }
