@@ -332,3 +332,41 @@ resource "vault_jwt_auth_backend_role" "dc-db-demo-app" {
   role_type               = "jwt"
   user_claim_json_pointer = true
 }
+
+
+
+
+
+#
+# Eddies Demo Namespace Access
+#
+
+resource "vault_policy" "eddies-demo" {
+  name = "eddies-demo-deploy"
+
+  policy = <<EOF
+path "secret/*" {
+  capabilities = ["list"]
+}
+path "secret/data/cluster/eddies-demo" {
+  capabilities = ["list","read"]
+}
+path "secret/metadata/cluster/eddies-demo" {
+  capabilities = ["list","read"]
+}
+EOF
+}
+
+resource "vault_jwt_auth_backend_role" "eddies-demo" {
+  backend        = vault_jwt_auth_backend.awesomeci_oidc.path
+  role_name      = "eddies-demo-deploy"
+  token_policies = ["nexus-deploy-access", "eddies-demo-deploy"]
+
+  bound_claims = {
+    "oidc.circleci.com/project-id" = "c45f4aa5-18b6-4b0a-805d-dd1dca8c775b"
+  }
+  user_claim              = "sub"
+  role_type               = "jwt"
+  user_claim_json_pointer = true
+}
+
