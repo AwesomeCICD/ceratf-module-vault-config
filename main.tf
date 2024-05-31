@@ -381,10 +381,10 @@ resource "vault_policy" "db-demo-app-gitlab" {
 path "secret/*" {
   capabilities = ["list"]
 }
-path "secret/data/cluster/db-demo-app-gitlab" {
+path "secret/data/cluster/dc-db-demo-app" {
   capabilities = ["list","read"]
 }
-path "secret/metadata/cluster/db-demo-app-gitlab" {
+path "secret/metadata/cluster/dc-db-demo-app" {
   capabilities = ["list","read"]
 }
 EOF
