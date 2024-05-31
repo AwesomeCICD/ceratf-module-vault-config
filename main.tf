@@ -370,3 +370,35 @@ resource "vault_jwt_auth_backend_role" "eddies-demo" {
   user_claim_json_pointer = true
 }
 
+#
+# db-demo-app-gitlab Namespace Access -> Gitlab projectID
+#
+
+resource "vault_policy" "db-demo-app-gitlab" {
+  name = "db-demo-app-gitlab-deploy"
+
+  policy = <<EOF
+path "secret/*" {
+  capabilities = ["list"]
+}
+path "secret/data/cluster/db-demo-app-gitlab" {
+  capabilities = ["list","read"]
+}
+path "secret/metadata/cluster/db-demo-app-gitlab" {
+  capabilities = ["list","read"]
+}
+EOF
+}
+
+resource "vault_jwt_auth_backend_role" "db-demo-app-gitlab" {
+  backend        = vault_jwt_auth_backend.awesomeci_oidc.path
+  role_name      = "db-demo-app-gitlab-deploy"
+  token_policies = ["nexus-deploy-access", "db-demo-app-gitlab-deploy"]
+
+  bound_claims = {
+    "oidc.circleci.com/project-id" = "2985ffa4-367c-4050-8c19-1b598298cceb"
+  }
+  user_claim              = "sub"
+  role_type               = "jwt"
+  user_claim_json_pointer = true
+}
