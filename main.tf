@@ -12,6 +12,13 @@ resource "vault_jwt_auth_backend" "gha_oidc" {
   bound_issuer       = "https://token.actions.githubusercontent.com"
 }
 
+resource "vault_jwt_auth_backend" "stone_monkeys_gitlab_oidc" {
+  description        = "stone-monkeys-gitlab Integration"
+  path               = "jwt"
+  oidc_discovery_url = "https://oidc.circleci.com/org/b06fed6f-34a7-4d56-995b-25317e0033c8"
+  bound_issuer       = "https://oidc.circleci.com/org/b06fed6f-34a7-4d56-995b-25317e0033c8"
+}
+
 resource "vault_mount" "kvv2" {
   path = "secret"
   type = "kv"
@@ -391,7 +398,7 @@ EOF
 }
 
 resource "vault_jwt_auth_backend_role" "db-demo-app-gitlab" {
-  backend        = vault_jwt_auth_backend.awesomeci_oidc.path
+  backend        = vault_jwt_auth_backend.stone_monkeys_gitlab_oidc.path
   role_name      = "db-demo-app-gitlab-deploy"
   token_policies = ["nexus-deploy-access", "db-demo-app-gitlab-deploy"]
 
