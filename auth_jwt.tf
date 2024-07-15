@@ -28,7 +28,7 @@ resource "vault_jwt_auth_backend" "circlecilabs_oidc" {
 
 resource "vault_jwt_auth_backend" "ecap_oidc" {
   description        = "ECAP OIDC Integration"
-  path               = "jwt"
+  path               = "jwt-ecap"
   oidc_discovery_url = "https://oidc.circleci.com/org/8ee930d4-fc91-4f55-8200-5106ce64d466"
   bound_issuer       = "https://oidc.circleci.com/org/8ee930d4-fc91-4f55-8200-5106ce64d466"
 }
