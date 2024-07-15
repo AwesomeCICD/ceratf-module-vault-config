@@ -25,3 +25,10 @@ resource "vault_jwt_auth_backend" "circlecilabs_oidc" {
   oidc_discovery_url = "https://oidc.circleci.com/org/4ada2c32-f0c2-4b60-a6b8-af674858fd51"
   bound_issuer       = "https://oidc.circleci.com/org/4ada2c32-f0c2-4b60-a6b8-af674858fd51"
 }
+
+resource "vault_jwt_auth_backend" "ecap_oidc" {
+  description        = "ECAP OIDC Integration"
+  path               = "jwt"
+  oidc_discovery_url = "https://oidc.circleci.com/org/8ee930d4-fc91-4f55-8200-5106ce64d466"
+  bound_issuer       = "https://oidc.circleci.com/org/8ee930d4-fc91-4f55-8200-5106ce64d466"
+}
