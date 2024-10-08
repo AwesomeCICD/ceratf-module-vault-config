@@ -14,6 +14,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
+      - checkout
       - workbench/versionfromgit
       - workbench/prinfo
       - workbench/bump
