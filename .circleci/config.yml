@@ -27,6 +27,7 @@ workflows:
           name: Validate Terraform Plan
       - bump:
           requires: [Validate Terraform Plan]
+          context: [ FE_GHI_TOKEN ]
           filters:
             branches:
               only: [main]
