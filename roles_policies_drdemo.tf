@@ -19,10 +19,25 @@ path "secret/metadata/cluster/dr-demo" {
 EOF
 }
 
+resource "vault_policy" "dr-demo-dev" {
+  name = "dr-demo-dev-deploy"
+
+  policy = <<EOF
+path "secret/*" {
+  capabilities = ["list"]
+}
+path "secret/data/cluster/dr-demo-dev" {
+  capabilities = ["list","read"]
+}
+path "secret/metadata/cluster/dr-demo-dev" {
+  capabilities = ["list","read"]
+}
+EOF
+}
 resource "vault_jwt_auth_backend_role" "dr-demo" {
   backend        = vault_jwt_auth_backend.awesomeci_oidc.path
   role_name      = "dr-demo-deploy"
-  token_policies = ["nexus-deploy-access", "dr-demo-deploy"]
+  token_policies = ["nexus-deploy-access", "dr-demo-deploy", "dr-demo-dev-deploy"]
 
   bound_claims = {
     "oidc.circleci.com/project-id" = "c45f4aa5-18b6-4b0a-805d-dd1dca8c775b"
