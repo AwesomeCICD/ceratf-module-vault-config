@@ -6,7 +6,7 @@ resource "vault_jwt_auth_backend_role" "training_prod" {
 
   bound_claims = {
     "oidc.circleci.com/context-ids" = "87c698a8-77fd-4ec0-935a-51ee55904aae"
-    "oidc.circleci.com/project-id"  = "fd5dc210-23ad-42e5-b01e-417320fc3945"
+    "oidc.circleci.com/project-id"  = "44fc5d2d-186d-44e6-9364-56d19b0a5ecb"
   }
   user_claim              = "sub"
   role_type               = "jwt"
@@ -20,7 +20,7 @@ resource "vault_jwt_auth_backend_role" "training_dev" {
 
   bound_claims = {
     "oidc.circleci.com/context-ids" = "7cf67bf2-cf99-4cc7-8ae5-a0daf86ae02b"
-    "oidc.circleci.com/project-id"  = "fd5dc210-23ad-42e5-b01e-417320fc3945"
+    "oidc.circleci.com/project-id"  = "44fc5d2d-186d-44e6-9364-56d19b0a5ecb5"
   }
   user_claim              = "sub"
   role_type               = "jwt"
